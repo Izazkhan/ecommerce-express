@@ -18,7 +18,10 @@ if (env === 'production') {
   dotenv.config();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2dbfb945d985561f499c292edce561d17ad40935
 // // Database Connection
 mongoose.connect(dbConfig.connectionUrl).then(
   () => { console.log("Connected") },
