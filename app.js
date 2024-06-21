@@ -18,6 +18,7 @@ if (env === 'production') {
   dotenv.config();
 }
 
+
 // // Database Connection
 mongoose.connect(dbConfig.connectionUrl).then(
   () => { console.log("Connected") },
@@ -35,6 +36,7 @@ var app = express();
 
 app.use(helmet());
 app.use(express.json());
+app.use(express.static("src/public"))
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'src/public')));

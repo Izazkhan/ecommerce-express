@@ -1,9 +1,15 @@
 import express from 'express';
 var router = express.Router();
-import userController from '../controllers/usersController.js';
+import AuthController from '../controllers/AuthController.js';
 import expressAsyncHandler from 'express-async-handler';
 // Register
-router.get('/register', userController.getUser);
+router.get('/register', AuthController.register);
+
+// Get User
+router.get('/user/:id/detail', AuthController.getUser);
+
+// Login User
+router.get('/login', AuthController.login);
 
 // Authenticate
 router.get('/authenticate', function(req, res, next) {
@@ -12,7 +18,7 @@ router.get('/authenticate', function(req, res, next) {
 
 // Profile
 router.get('/profile', function(req, res, next) {
-    userController.getUser("Izaz")
+    AuthController.getUser("Izaz")
 });
 
 // Validate
