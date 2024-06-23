@@ -1,12 +1,13 @@
 import express from 'express';
 var router = express.Router();
-import AuthController from '../controllers/AuthController.js';
+import AuthController from '../controllers/auth-controller.js';
 import expressAsyncHandler from 'express-async-handler';
+import AuthService from '../services/auth-service.js';
 // Register
 router.get('/register', AuthController.register);
 
 // Get User
-router.get('/user/:id/detail', AuthController.getUser);
+router.get('/user/:id', AuthService.authenticate(), AuthController.getUser);
 
 // Login User
 router.get('/login', AuthController.login);

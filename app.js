@@ -2,13 +2,17 @@ import createError from 'http-errors';
 import express from 'express';
 import helmet from 'helmet';
 import path from 'path';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import logger from './logger.js';
+import logger from './src/utils/logger.js';
 import mongoose from 'mongoose';
 import dbConfig from './src/config/database.js';
 import apiRouter from './src/routes/api.js';
 import authRouter from './src/routes/auth.js';
+import NotFoundHandler from './src/middlewares/notfound-handler.js';
+import ErrorHandler from './src/middlewares/error-handler.js';
+import RateLimiter from './src/middlewares/rate-limit.js';
 
 // Load environment variables from .env file, based on NODE_ENV
 const env = process.env.NODE_ENV || 'development';
@@ -18,39 +22,27 @@ if (env === 'production') {
   dotenv.config();
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2dbfb945d985561f499c292edce561d17ad40935
 // // Database Connection
 mongoose.connect(dbConfig.connectionUrl).then(
   () => { console.log("Connected") },
   err => { console.log("DB error", err) }
 );
-// mongoose.connection.on('connected', () => {
-// });
-
-
-// mongoose.connection.on('error', (err) => {
-//   console.log('Database error: ' + err);
-// })
 
 var app = express();
 
-app.use(helmet());
+app.use(helmet()); // 
 app.use(express.json());
 app.use(express.static("src/public"))
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'src/public')));
+app.use(cors());
+app.use(RateLimiter);
 
 app.use('/api', apiRouter);
-app.use('/api/user', authRouter);
+app.use('/api', authRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+app.use(NotFoundHandler);
+app.use(ErrorHandler);
 
 // error handler
 app.use((err, req, res, next) => {
