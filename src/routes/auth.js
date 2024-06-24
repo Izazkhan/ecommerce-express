@@ -4,7 +4,7 @@ import AuthController from '../controllers/auth-controller.js';
 import expressAsyncHandler from 'express-async-handler';
 import AuthService from '../services/auth-service.js';
 // Register
-router.get('/register', AuthController.register);
+router.post('/register', AuthController.register);
 
 // Get User
 router.get('/user/:id', AuthService.authenticate(), AuthController.getUser);

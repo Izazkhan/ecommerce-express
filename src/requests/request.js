@@ -1,12 +1,20 @@
+import {ValidationError} from "../exceptions/custom-exception.js";
+import { generateErrorSummary, mapErrorDetails } from "../utils/mapErrorDetails.js";
+import Joi from 'joi';
+
 class Request {
   constructor(req) {
-    this.request = {...req.body,  ...req.query};
+    this.request = req.body;
   }
 
   validate() {
-    const { error } = this.schema.validate(this.request);
+    const options = {
+      abortEarly: false
+    }
+    const { error } = Joi.object(this.schema).unknown(true).validate(this.request, options)
     if (error) {
-      throw new Error(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
+      console.log(error);
+      throw new ValidationError(generateErrorSummary(error.details) ?? 'Bad Request', mapErrorDetails(error.details));
     }
   }
 }

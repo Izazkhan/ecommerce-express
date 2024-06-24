@@ -1,14 +1,10 @@
 import asyncHandler from "express-async-handler";
 import User from '../models/user.js';
 import AuthService from "../services/auth-service.js";
-import GetUsersRequest from "../requests/get-users-request.js";
+import RegisterUserRequest from "../requests/register-user-request.js";
 
 class AuthController {
   static getUser = asyncHandler(async (req, res, next) => {
-
-    // Validate request data
-    new GetUsersRequest(req).validate();
-
     const user = await User.findById(req.params.id);
     if (!user) {
       throw new Error('User not found');
@@ -17,6 +13,8 @@ class AuthController {
   });
 
   static register = asyncHandler(async (req, res, next) => {
+    // Validate request data
+    new RegisterUserRequest(req).validate();
     const { name, email, password } = req.body;
     try {
       let user = await User.findOne({ email });
