@@ -11,7 +11,7 @@ class Request {
     const options = {
       abortEarly: false
     }
-    const { error } = Joi.object(this.schema).unknown(true).validate(this.request, options)
+    const { error } = Joi.object(this.schema).validate(this.request, options)
     if (error) {
       console.log(error);
       throw new ValidationError(generateErrorSummary(error.details) ?? 'Bad Request', mapErrorDetails(error.details));

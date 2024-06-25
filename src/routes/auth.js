@@ -10,7 +10,7 @@ router.post('/register', AuthController.register);
 router.get('/user/:id', AuthService.authenticate(), AuthController.getUser);
 
 // Login User
-router.get('/login', AuthController.login);
+router.post('/login', AuthController.login);
 
 // Authenticate
 router.get('/authenticate', function(req, res, next) {

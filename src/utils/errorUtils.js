@@ -23,6 +23,5 @@ export const generateErrorSummary = (details) => {
       const moreErrorsCount = numErrors - 1;
       summary += ` (and ${moreErrorsCount} more ${moreErrorsCount > 1 ? 'errors' : 'error'})`;
     }
-    console.log(numErrors);
     return summary;
   };

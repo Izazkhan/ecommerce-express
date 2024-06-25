@@ -1,6 +1,6 @@
 // requests/getUserRequest.js
 import Joi from 'joi';
-import Request from './request.js';
+import Request from '../request.js';
 
 class RegisterUserRequest extends Request {
   constructor(req) {
@@ -13,7 +13,7 @@ class RegisterUserRequest extends Request {
       email: Joi.string().trim().email().required().messages({
         'string.empty': 'The email field is required'
       }),
-      password: Joi.string().alphanum().min(6).max(20),
+      password: Joi.string().min(6).max(20),
       password_confirmation: Joi.ref('password')
     };
   }
