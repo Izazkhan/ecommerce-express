@@ -1,4 +1,4 @@
-import logger from "../utils/logger.js";
+import logger from "#utils/logger.js";
 
 const ErrorHandler = (err, req, res, next) => {
   if (err.code == 422) {

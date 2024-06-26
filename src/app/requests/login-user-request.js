@@ -1,6 +1,6 @@
 // requests/getUserRequest.js
 import Joi from 'joi';
-import Request from './request.js';
+import Request from '#requests/request.js';
 
 class LoginUserRequest extends Request {
   constructor(req) {

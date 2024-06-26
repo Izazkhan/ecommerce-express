@@ -2,11 +2,11 @@ import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import User from '../models/user.js'; // Adjust the path as needed
+import User from '#models/user.js'; // Adjust the path as needed
 
 dotenv.config();
 
-class AuthService {
+class PassportService {
   constructor() {
     this.jwtSecret = process.env.JWT_SECRET;
     this.init();
@@ -44,4 +44,4 @@ class AuthService {
   }
 }
 
-export default AuthService;
+export default PassportService;

@@ -1,13 +1,11 @@
-import User from "../models/user.js";
-import UserRepository from "../repositories/userRepository.js";
-import AuthService from "./auth-service.js"
+import Passport from "#services/passport-service.js"
+import UserRepository from "#repositories/userRepository.js";
 
-class UserService {
+class AuthService {
     constructor() {
-        this.authService = new AuthService;
+        this.passportService = new Passport;
         this.userRepository = new UserRepository;
     }
-
     async loginUser(email, password) {
         let user = await this.userRepository.findByEmail(email);
         if (!user) {
@@ -19,9 +17,9 @@ class UserService {
             throw new Error('Invalid credentials');
         }
 
-        const token = this.authService.generateToken(user);
+        const token = this.passportService.generateToken(user);
         return { msg: 'Login Successful', token: token };
     }
 }
 
-export default UserService;
+export default AuthService;

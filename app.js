@@ -1,4 +1,4 @@
-import createError from 'http-errors';
+
 import express from 'express';
 import helmet from 'helmet';
 import path from 'path';
@@ -6,14 +6,14 @@ import cors from 'cors';
 import xss from 'xss-clean';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import logger from './src/utils/logger.js';
+import logger from '#utils/logger.js';
 import mongoose from 'mongoose';
-import dbConfig from './src/config/database.js';
-import apiRouter from './src/routes/api.js';
-import authRouter from './src/routes/auth.js';
-import NotFoundHandler from './src/middlewares/notfound-handler.js';
-import ErrorHandler from './src/middlewares/error-handler.js';
-import RateLimiter from './src/middlewares/rate-limit.js';
+import dbConfig from '#config/database.js';
+import apiRouter from '#routes/api.js';
+import authRouter from '#routes/auth.js';
+import NotFoundHandler from '#middlewares/notfound-handler.js';
+import ErrorHandler from '#middlewares/error-handler.js';
+import RateLimiter from '#middlewares/rate-limit.js';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 
 // Load environment variables from .env file, based on NODE_ENV

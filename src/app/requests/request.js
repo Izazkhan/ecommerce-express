@@ -1,5 +1,5 @@
-import {ValidationError} from "../exceptions/custom-exception.js";
-import { generateErrorSummary, mapErrorDetails } from "../utils/errorUtils.js";
+import {ValidationError} from "#exceptions/custom-exception.js";
+import { generateErrorSummary, mapErrorDetails } from "#utils/errorUtils.js";
 import Joi from 'joi';
 
 class Request {
