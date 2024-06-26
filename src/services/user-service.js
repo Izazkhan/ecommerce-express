@@ -1,9 +1,11 @@
-import User from "../models/user";
-import AuthService from "./auth-service";
+import User from "../models/user.js";
+import UserRepository from "../repositories/userRepository.js";
+import AuthService from "./auth-service.js"
 
 class UserService {
     constructor() {
         this.authService = new AuthService;
+        this.userRepository = new UserRepository;
     }
 
     async loginUser(email, password) {
@@ -21,3 +23,5 @@ class UserService {
         return { msg: 'Login Successful', token: token };
     }
 }
+
+export default UserService;

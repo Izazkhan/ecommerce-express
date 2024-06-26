@@ -1,13 +1,12 @@
 import express from 'express';
 var router = express.Router();
 import AuthController from '../controllers/auth-controller.js';
-import expressAsyncHandler from 'express-async-handler';
 import AuthService from '../services/auth-service.js';
+
+const authService = new AuthService();
+
 // Register
 router.post('/register', AuthController.register);
-
-// Get User
-router.get('/user/:id', AuthService.authenticate(), AuthController.getUser);
 
 // Login User
 router.post('/login', AuthController.login);

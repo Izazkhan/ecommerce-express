@@ -13,8 +13,8 @@ class RegisterUserRequest extends Request {
       email: Joi.string().trim().email().required().messages({
         'string.empty': 'The email field is required'
       }),
-      password: Joi.string().min(6).max(20),
-      password_confirmation: Joi.ref('password')
+      password: Joi.string().min(6).max(20)
+      // password_confirmation: Joi.ref('password')
     };
   }
 }
