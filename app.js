@@ -15,6 +15,8 @@ import NotFoundHandler from '#middlewares/notfound-handler.js';
 import ErrorHandler from '#middlewares/error-handler.js';
 import RateLimiter from '#middlewares/rate-limit.js';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
+import '#jobs/worker.js';
+
 
 // Load environment variables from .env file, based on NODE_ENV
 const env = process.env.NODE_ENV || 'development';
@@ -42,6 +44,9 @@ app.use(cookieParser());
 app.use(cors());
 app.use(RateLimiter);
 
+app.get('/', (req, res) => {
+  res.status(403).send('Access Denied.');
+});
 app.use('/api', apiRouter);
 app.use('/api', authRouter);
 

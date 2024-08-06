@@ -6,6 +6,7 @@ class AuthService {
         this.passportService = new Passport;
         this.userRepository = new UserRepository;
     }
+    
     async loginUser(email, password) {
         let user = await this.userRepository.findByEmail(email);
         if (!user) {
