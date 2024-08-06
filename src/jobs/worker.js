@@ -1,14 +1,22 @@
 import { Worker, Job } from 'bullmq';
-import IORedis from 'ioredis';
+import { Redis } from 'ioredis';
+import dotenv from 'dotenv';
 
-const conn = new IORedis();
-console.log(conn);
+dotenv.config();
+
+const connection = {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    maxRetriesPerRequest: null
+};
+
+const conn = new Redis(connection);
 
 // worker for email-jobs
 const worker = new Worker('email-jobs', async (job) => {
 	switch (job.name) {
 	case 'forgot-password-mail-job':
-		console.log('Sending email to...', job.data.to)
+		console.log('Sending email to...', job.data)
 		break;
 	default:
 		throw new Error("Unknown job name " + job.name);
