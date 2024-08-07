@@ -15,7 +15,7 @@ import NotFoundHandler from '#middlewares/notfound-handler.js';
 import ErrorHandler from '#middlewares/error-handler.js';
 import RateLimiter from '#middlewares/rate-limit.js';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
-import '#jobs/worker.js';
+import '#services/queues/worker.js';
 
 
 // Load environment variables from .env file, based on NODE_ENV

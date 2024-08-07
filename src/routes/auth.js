@@ -2,6 +2,7 @@ import express from 'express';
 var router = express.Router();
 import RegisterController from '#controllers/auth/register-controller.js';
 import LoginController from '#controllers/auth/login-controller.js';
+import ResetPasswordController from '#controllers/auth/reset-password-controller.js';
 
 // Register
 router.post('/register', RegisterController.register);
@@ -14,9 +15,7 @@ router.get('/authenticate', function(req, res, next) {
   res.send('Authenticate');
 });
 
-// Validate
-router.get('/validate', function(req, res, next) {
-  res.send('Validate');
-});
+// Send reset password email
+router.post('/password/email', ResetPasswordController.resetPassword);
 
 export default router;

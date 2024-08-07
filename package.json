@@ -44,7 +44,6 @@
   "imports": {
     "#root/*.js": "./*.js",
     "#config/*.js": "./src/config/*.js",
-    "#queues/*.js": "./src/app/queues/*.js",
     "#jobs/*.js": "./src/app/jobs/*.js",
     "#mails/*.js": "./src/app/mails/*.js",
     "#controllers/*.js": "./src/app/controllers/*.js",
