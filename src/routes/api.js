@@ -21,7 +21,7 @@ router.get('/user/:id', UserController.getUser);
 router.get('/user/:id', passport.authenticate(), UserController.getUser);
 
 router.get('/jobs', async function(req, res, next) {
-  await forgotPasswordEmailJob({email: 'izaz@example.com'});
+  await forgotPasswordEmailJob({to: 'izaz@example.com'});
   return res.send("Success");
 });
 
