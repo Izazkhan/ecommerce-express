@@ -7,7 +7,13 @@ class UserService {
         this.userRepository = new UserRepository;
     }
 
-    
+    async findByEmail(email) {
+        return await this.userRepository.findByEmail(email);
+    }
+
+    async saveResetPasswordToken(email, token) {
+        return await this.userRepository.saveResetPasswordToken(email, token);
+    }
 }
 
 export default UserService;

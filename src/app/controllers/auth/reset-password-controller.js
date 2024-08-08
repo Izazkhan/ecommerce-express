@@ -1,18 +1,42 @@
 import expressAsyncHandler from "express-async-handler";
 import { dispatch } from '#services/queues/dispatch.js';
+import PassportService from "#services/passport-service.js";
+import UserService from "#services/user-service.js"
+import dotenv from 'dotenv';
+import crypto from 'crypto';
+
+dotenv.config();
+
 class ResetPasswordController {
 
-    static resetPassword = expressAsyncHandler(async (req, res, next) => {
-        // check this email exists in DB?
-        // if yes then send email otherwise throw error
-        await dispatch('resetPasswordEmailJob', {
-            user: {
-                name: "Izaz Khan",
-                email: 'izaz@example.com'
+    constructor() {
+        this.passportService = new PassportService();
+        this.userService = new UserService;
+    }
+
+    resetPassword = expressAsyncHandler(async (req, res, next) => {
+
+        try {
+            // check this email exists in DB?
+            let user = await this.userService.findByEmail(req.body.email);
+
+            if (!user) {
+                return res.status(404).json({ message: 'Invalid email address.' });
             }
-        });
-        return res.status(200).json({msg: 'Reset password email sent.'});
+
+            const token = crypto.randomBytes(15).toString('base64').substring(0, 20);
+
+
+            await dispatch('resetPasswordEmailJob', {
+                user: user,
+                resetPasswordLink: `http://${process.env.FRONTEND_APP_URL}/reset-password/${token}`
+            });
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({ msg: 'Something went wrong. Please contact support if this issue persists.' });
+        }
+        return res.status(200).json({ msg: 'Reset password email sent.' });
     });
 }
 
-export default ResetPasswordController;
+export default new ResetPasswordController();

@@ -24,7 +24,10 @@ const worker = new Worker('email-jobs', async (job) => {
 	// Process Job
 	await handler(job);
 
-}, { connection: conn });
+}, { 
+	connection: conn,
+	removeOnCompletion: { count: 10 }
+});
 
 worker.on('completed', job => {
 	// Do something with the return value.

@@ -7,11 +7,11 @@ import AuthService from "#services/auth-service.js";
 const authService = new AuthService();
 
 class LoginController {
-    static login = asyncHandler(async (req, res, next) => {
+    login = asyncHandler(async (req, res, next) => {
     new LoginRequest(req).validate();
     let response = await authService.loginUser(req.body.email, req.body.password);
     return res.json(response);
   });
 }
 
-export default LoginController;
+export default new LoginController;

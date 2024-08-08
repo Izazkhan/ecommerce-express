@@ -36,6 +36,7 @@ class PassportService {
   generateToken(user) {
     return jwt.sign({ id: user._id }, this.jwtSecret, {
       expiresIn: '1h', // Token expiration time
+      algorithm: 'sha1'
     });
   }
 

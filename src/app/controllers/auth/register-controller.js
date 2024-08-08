@@ -7,7 +7,7 @@ const userService = new UserService();
 
 class RegisterController {
     
-    static register = asyncHandler(async (req, res, next) => {
+    register = asyncHandler(async (req, res, next) => {
       // Validate request data
       new RegisterUserRequest(req).validate();
       const { name, email, password } = req.body;
@@ -32,4 +32,4 @@ class RegisterController {
     });
 }
 
-export default RegisterController;
+export default new RegisterController;
