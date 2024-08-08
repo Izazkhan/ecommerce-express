@@ -25,11 +25,12 @@ class ResetPasswordController {
             }
 
             const token = crypto.randomBytes(15).toString('base64').substring(0, 20);
-
+            user.token = token;
+            await user.save();
 
             await dispatch('resetPasswordEmailJob', {
                 user: user,
-                resetPasswordLink: `http://${process.env.FRONTEND_APP_URL}/reset-password/${token}`
+                resetPasswordLink: `${process.env.FRONTEND_APP_URL}/reset-password/${token}`
             });
         } catch (error) {
             console.log(error);
