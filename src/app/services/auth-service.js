@@ -14,8 +14,9 @@ class AuthService {
         }
 
         const isMatch = await user.comparePassword(password);
+        console.log(isMatch);
         if (!isMatch) {
-            throw new Error('Invalid credentials');
+            throw new Error('Invalid credentialss');
         }
 
         const token = this.passportService.generateToken(user);

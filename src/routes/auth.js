@@ -16,6 +16,7 @@ router.get('/authenticate', function(req, res, next) {
 });
 
 // Send reset password email
-router.post('/password/email', ResetPasswordController.resetPassword);
+router.post('/password/email', ResetPasswordController.passwordLink);
+router.post('/password/reset', ResetPasswordController.resetPassword);
 
 export default router;

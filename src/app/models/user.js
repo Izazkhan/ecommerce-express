@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 const UserSchema = mongoose.Schema({
     name: {
@@ -26,16 +26,7 @@ const UserSchema = mongoose.Schema({
         }
     },
 
-    statics: {
-        getUserById: function (id, callback) {
-            User.findById(id, callback);
-        },
-
-        getUserByName: function (username, callback) {
-            let query = { "name": username };
-            return User.findOne(query);
-        }
-    }
+    statics: {}
 })
 
 UserSchema.pre('save', async function (next) {

@@ -14,6 +14,10 @@ class UserService {
     async saveResetPasswordToken(email, token) {
         return await this.userRepository.saveResetPasswordToken(email, token);
     }
+
+    async getUserByToken(token) {
+        return await this.userRepository.findByToken(token);
+    }
 }
 
 export default UserService;
